@@ -1,0 +1,40 @@
+version: '3.4'
+services:
+  awx-v9-master:
+    image: postgres:10 
+    restart: unless-stopped
+    container_name: awx-postgres
+    volumes:
+      - /srv/awx/pgdocker:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DBName}
+      - TZ=${TimeZ}
+      - PGTZ=${PGTimeZ}
+      - PG_REP_USER=${REPL_USER}
+      - PG_REP_PASSWORD=${REPL_USER_PASS}
+      - REPORT_USER=${REPORT_U}
+      - REPORT_U_PASSWORD=${REPORT_U_PW}
+    networks:
+      awx-v9-postgres_nw:
+        ipv4_address: 172.25.0.2
+    ports:
+      - "5432:5432"
+    expose:
+      - "22"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.9'
+          memory: 700M
+# reservation, for only docker swarm
+#        reservations:
+#          cpus: '0.05'
+#          memory: 100M
+
+networks:
+  awx-v9-postgres_nw:
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

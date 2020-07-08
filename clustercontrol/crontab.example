@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+MAILTO=root@example.com
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+*/20 * * * * /usr/local/bin/start-cron.sh 

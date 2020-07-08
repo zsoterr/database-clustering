@@ -1,0 +1,2 @@
+host all         monitor 172.25.0.0/24 md5
+host replication ccrepl 172.25.0.0/24 md5
