@@ -1,10 +1,10 @@
 Steps of deployment:
 
 I. Master node:
-- create a new image using Dockerfile
+- create a new image using Dockerfile: for example: docker build -t  awx-v9-psql-v10-master:1 . -you will use this image in docker compose file
 - create the necessary paths:
  /srv/awx/pgdocker
-- set the username and passwords (db user,replica user,report user) ,db name,timezone of container and postgresql - in .env file
+- set the image name, username and passwords (db user,replica user,report user) ,db name,timezone of container and postgresql - in .env file
 - if you want to use different IP address for master node: edit compose file: edit or remove this part:
         ipv4_address: 172.25.0.2
 - the master node's psql port will be published for external network, if this is not fit for you, edit the compose file before the deplyoment: comment these:
@@ -21,10 +21,10 @@ I. Master node:
 II. Slave node:
 Based on same image as master container, with a small variation: has been prepared for slave role.
 We will create a psql container (using new image) with slave role and place it same network as master node:
-- create a new image using Dockerfile
+- create a new image using Dockerfile: for example: docker build -t  awx-v9-psql-v10-slave:1 . -you will use this image in docker compose file
 - create the necessary paths:
  /srv/awx/pgdocker2
-- set the username and passwords,db name,timezone of container and postgresql - in .env file
+- set the image name, username and passwords,db name,timezone of container and postgresql - in .env file
 - if you want to use different IP address for master node: edit compose file: edit or remove this part:
         ipv4_address: 172.25.0.3
 - the slave node's psql port will be published for external network, if this is not fit for you, edit the compose file before the deplyoment: comment these:

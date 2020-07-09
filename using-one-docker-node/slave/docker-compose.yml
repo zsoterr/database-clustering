@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   postgres-slv1:
-    image: postgres:10 
+    image: ${IMAGE} 
     restart: unless-stopped
     container_name: awx-postgres-slv_1
     volumes:

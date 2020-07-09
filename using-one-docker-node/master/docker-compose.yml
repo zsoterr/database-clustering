@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   awx-v9-master:
-    image: postgres:10 
+    image: ${IMAGE} 
     restart: unless-stopped
     container_name: awx-postgres
     volumes:
